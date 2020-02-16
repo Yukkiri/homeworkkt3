@@ -1,83 +1,62 @@
 package ru.puchkova.hwkt3
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var date: TextView
-    private lateinit var author: TextView
-    private lateinit var mainText: TextView
-    private lateinit var likes: ImageButton
-    private lateinit var comments: ImageButton
-    private lateinit var repost: ImageButton
-    private lateinit var likesCount: TextView
-    private lateinit var commentsCount: TextView
-    private lateinit var repostCount: TextView
-
-    private val post = Post("13 september 2019", "Netology", "Some text here\nHas no idea what i should write\nJust testing my code",
-        9, 0, 1, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        init()
+        //ВООБЩЕ НЕ ПОНИМАЮ ЧТО ДЕЛАЮ
 
-        setPost()
-    }
+        val posts = listOf(
 
-    fun init() {
-        date = findViewById(R.id.date)
-        author = findViewById(R.id.author)
-        mainText = findViewById(R.id.mainText)
-        likes = findViewById(R.id.like)
-        comments = findViewById(R.id.comment)
-        repost = findViewById(R.id.share)
-        likesCount = findViewById(R.id.like_count)
-        commentsCount = findViewById(R.id.comment_count)
-        repostCount = findViewById(R.id.share_count)
+            Post("13 september 2019", "Netology", "Some text here\nHas no idea what i should write\nJust testing my code",
+                9, 0, 1, false, "http://video.ch9.ms/ch9/507d/71f4ef0f-3b81-4d2c-956f-c56c81f9507d/AndroidEmulatorWithMacEmulator.mp4"),
 
-        likes.setOnClickListener{
-            if(post.isLiked) {
-                post.isLiked = false
-                post.likeCount--
-                likesCount.setText(post.likeCount.toString())
-            } else {
-                post.isLiked = true
-                post.likeCount++
-                likesCount.setText(post.likeCount.toString())
-            }
-            setColor()
+            Post("15 september 2019", "Netology", "Otters are cute",
+                0, 0, 2, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("16 september 2019", "Netology", "But raccoons are cuter\nThe most cutest creatures in the whole world",
+                99, 0, 5, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("20 october 2019", "Netology", "And stupid\nofc, how can i forgot",
+                150, 10, 3, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("31 december 2019", "Netology", "Happy New Year!\nGood luck!",
+                1393, 255, 100, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("1 january 2020", "Netology", "So much food was a mistake\nFeeling too bad\nHlp m pls",
+                1800, 1010, 99, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("10 january 2020", "Netology", "Idk what to write\nLook at my horse\nMy horse is amazing",
+                3, 40, 0, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("15 january 2020", "Netology", "The most\nUseless\nWay\nto waste\nmy time\nOMG",
+                33, 1, 0, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM"),
+
+            Post("16 january 2020", "Netology", "Just a joke, relax",
+                20, 0, 0, false, "https://www.youtube.com/watch?v=rIwGkC8QjyM")
+        )
+
+        postList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL ,false)
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            val permissions = arrayOf(Manifest.permission.INTERNET)
+            ActivityCompat.requestPermissions(this, permissions,0)
         }
-    }
 
-    fun setPost(){
-        date.setText(post.date)
-        author.setText(post.author)
-        mainText.setText(post.postBody)
-        if(post.likeCount != 0)
-            likesCount.setText(post.likeCount.toString())
-        else
-            likesCount.setText("")
-        if(post.commentCount != 0)
-            commentsCount.setText(post.commentCount.toString())
-        else
-            commentsCount.setText("")
-        if(post.repostCount != 0)
-            repostCount.setText(post.repostCount.toString())
-        else
-            repostCount.setText("")
+        val adapter = MediaPostAdapter(posts)
 
-        setColor()
-    }
-
-    fun setColor(){
-        if(post.isLiked)
-            likes.setBackgroundResource(R.drawable.ic_like_true)
-        else
-            likes.setBackgroundResource(R.drawable.ic_favorite)
+        postList.adapter = adapter
     }
 }
