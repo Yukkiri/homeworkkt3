@@ -1,20 +1,30 @@
-package ru.puchkova.hwkt3
+package ru.puchkova.hwkt3.adapter.holder
 
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.post_card.view.*
+import ru.puchkova.hwkt3.R
+import ru.puchkova.hwkt3.models.IPost
+import ru.puchkova.hwkt3.models.Post
 
 open class MainHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(post: Post) {
-        var author = itemView.findViewById<TextView>(R.id.author)
-        var date = itemView.findViewById<TextView>(R.id.date)
-        var likesCount = itemView.findViewById<TextView>(R.id.likesCount)
-        var shareCount = itemView.findViewById<TextView>(R.id.shareCount)
-        var commentCount = itemView.findViewById<TextView>(R.id.commentsCount)
-        var like = itemView.findViewById<ImageButton>(R.id.like)
-        var comment = itemView.findViewById<ImageButton>(R.id.comment)
-        var share = itemView.findViewById<ImageButton>(R.id.share)
+
+    // Все переменные должны быть инициализированй один раз,
+    // иначе ты теряешь преимущества холдера.
+    // findViewById - дорогая операция
+    // тут мы, кстати, заменили ее синтетикаами котлина, которые под капотом дергают всю ту же
+    // findViewById
+    var author = itemView.author
+    var date = itemView.date
+    var likesCount = itemView.likesCount
+    var shareCount = itemView.shareCount
+    var commentCount = itemView.commentsCount
+    var like = itemView.like
+    var comment = itemView.comment
+    var share = itemView.share
+
+    fun bind(post: IPost) {
+
         author.text = post.author
         date.text = post.date
         likesCount.text = post.likeCount.toString()

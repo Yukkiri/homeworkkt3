@@ -1,4 +1,4 @@
-package ru.puchkova.hwkt3
+package ru.puchkova.hwkt3.models
 
 /*
 class MediaPost(

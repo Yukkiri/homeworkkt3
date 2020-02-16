@@ -1,19 +1,18 @@
-package ru.puchkova.hwkt3
+package ru.puchkova.hwkt3.adapter.holder
 
-import android.net.Uri
 import android.view.View
 import android.widget.TextView
 import android.widget.VideoView
-import androidx.core.net.toUri
+import ru.puchkova.hwkt3.R
+import ru.puchkova.hwkt3.models.Post
 
-class MediaPostHolder(itemView: View) : MainHolder(itemView){
-    fun bindVideo(post: Post) {
+class GeoPostHolder(itemView: View) : MainHolder(itemView){
+    fun bindGeo(post: Post) {
         super.bind(post)
         val mainText = itemView.findViewById<TextView>(R.id.mainText)
         val video: VideoView = itemView.findViewById(R.id.video)
         mainText.text = post.postBody
         video.visibility = View.VISIBLE
-        val uri: Uri = post.videoLink!!.toUri()
-        video.setVideoURI(uri)
+//        video.setVideoPath(post.videoLink)
     }
 }
