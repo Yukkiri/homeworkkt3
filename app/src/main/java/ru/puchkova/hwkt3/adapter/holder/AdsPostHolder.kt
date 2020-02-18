@@ -3,16 +3,20 @@ package ru.puchkova.hwkt3.adapter.holder
 import android.view.View
 import android.widget.TextView
 import android.widget.VideoView
+import kotlinx.android.synthetic.main.ads_post.view.*
 import ru.puchkova.hwkt3.R
+import ru.puchkova.hwkt3.models.AdsPost
 import ru.puchkova.hwkt3.models.Post
 
 class AdsPostHolder(itemView: View) : MainHolder(itemView){
-    fun bindAds(post: Post) {
+    val delete = itemView.delete
+    fun bindAds(post: AdsPost) {
         super.bind(post)
         val mainText = itemView.findViewById<TextView>(R.id.mainText)
-        val video: VideoView = itemView.findViewById(R.id.video)
         mainText.text = post.postBody
-        video.visibility = View.VISIBLE
-//        video.setVideoPath(post.videoLink)
+
+        delete.setOnClickListener{
+            itemView.visibility = View.GONE
+        }
     }
 }

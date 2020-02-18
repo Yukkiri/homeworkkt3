@@ -20,8 +20,6 @@ open class MainHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var shareCount = itemView.shareCount
     var commentCount = itemView.commentsCount
     var like = itemView.like
-    var comment = itemView.comment
-    var share = itemView.share
 
     fun bind(post: IPost) {
 

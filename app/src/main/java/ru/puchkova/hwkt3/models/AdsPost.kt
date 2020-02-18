@@ -1,9 +1,6 @@
 package ru.puchkova.hwkt3.models
 
-data class GeoPost(
-    val coords: String,
-    val address: String,
-
+data class AdsPost(
     override val date: String,
     override val author: String,
     override val postBody: String? = null,
@@ -13,5 +10,5 @@ data class GeoPost(
     override var isLiked: Boolean
 ) : IPost {
 
-    override fun getPostType() = IPost.PostType.GEO
+    override fun getPostType() = IPost.PostType.ADS
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.puchkova.hwkt3.adapter.MediaPostAdapter
+import ru.puchkova.hwkt3.models.AdsPost
 import ru.puchkova.hwkt3.models.Post
 import ru.puchkova.hwkt3.models.VideoPost
 
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 false
             ),
 
-            Post(
+            AdsPost(
                 "15 september 2019", "Netology", "Otters are cute",
                 0, 0, 2, false
             ),

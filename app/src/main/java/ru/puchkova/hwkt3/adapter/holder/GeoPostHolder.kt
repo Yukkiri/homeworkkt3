@@ -1,18 +1,15 @@
 package ru.puchkova.hwkt3.adapter.holder
 
 import android.view.View
-import android.widget.TextView
-import android.widget.VideoView
-import ru.puchkova.hwkt3.R
-import ru.puchkova.hwkt3.models.Post
+import kotlinx.android.synthetic.main.post_card.view.*
+import ru.puchkova.hwkt3.models.GeoPost
 
 class GeoPostHolder(itemView: View) : MainHolder(itemView){
-    fun bindGeo(post: Post) {
+    val mainText = itemView.mainText
+
+
+    fun bindGeo(post: GeoPost) {
         super.bind(post)
-        val mainText = itemView.findViewById<TextView>(R.id.mainText)
-        val video: VideoView = itemView.findViewById(R.id.video)
         mainText.text = post.postBody
-        video.visibility = View.VISIBLE
-//        video.setVideoPath(post.videoLink)
     }
 }
